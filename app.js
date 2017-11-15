@@ -13,10 +13,10 @@ var app = express();
 
 
 
-// const passport = require('passport')
-// const GoogleStrategy = require('passport-google').Strategy
-//
-//
+const passport = require('passport')
+const GoogleStrategy = require('passport-google').Strategy
+
+
 // passport.serializeUser(function(user, done) {
 //   done(null, user);
 // });
@@ -25,17 +25,17 @@ var app = express();
 //   done(null, obj);
 // });
 //
-passport.use(new GoogleStrategy({
-    consumerKey: GOOGLE_CONSUMER_KEY,
-    consumerSecret: GOOGLE_CONSUMER_SECRET,
-    callbackURL: "http://www.example.com/auth/google/callback"
-  },
-  function(token, tokenSecret, profile, done) {
-      User.findOrCreate({ googleId: profile.id }, function (err, user) {
-        return done(err, user);
-      });
-  }
-));
+// passport.use(new GoogleStrategy({
+//     consumerKey: GOOGLE_CONSUMER_KEY,
+//     consumerSecret: GOOGLE_CONSUMER_SECRET,
+//     callbackURL: "http://www.example.com/auth/google/callback"
+//   },
+//   function(token, tokenSecret, profile, done) {
+//       User.findOrCreate({ googleId: profile.id }, function (err, user) {
+//         return done(err, user);
+//       });
+//   }
+// ));
 
 
 
