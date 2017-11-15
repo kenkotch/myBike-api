@@ -9,6 +9,7 @@ var users = require('./routes/users');
 var authRoutes = require('./routes/authRoutes')
 var cyclists= require('./routes/cyclists');
 var bikes = require('./routes/bikes');
+var passportSetup=require('./config/passport-setup')
 var app = express();
 
 
