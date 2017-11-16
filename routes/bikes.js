@@ -18,4 +18,8 @@ router.get('/', (req, res, next)=>{
   })
 })
 
+router.post('/', (req, res, next)=>{
+  res.send('the will is stronger than the skill')
+})
+
 module.exports = router;
