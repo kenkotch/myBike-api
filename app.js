@@ -16,7 +16,7 @@ var app = express();
 
 
 const passport = require('passport')
-const GoogleStrategy = require('passport-google').Strategy
+const GoogleStrategy = require('passport-google-oauth20').Strategy
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

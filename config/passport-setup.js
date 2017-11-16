@@ -1,14 +1,21 @@
 const passport = require('passport');
-const GoogleStrategy = require('passport-google-oauth20')
+const GoogleStrategy = require('passport-google-oauth20').Strategy
 const keys = require('./keys')
 
 
 passport.use(new GoogleStrategy({
-  callBackURL: '/auth/google/redirect',
+  callbackURL: 'http://localhost:3000',
   clientID: keys.google.clientID,
   clientSecret: keys.google.clientSecret
-  //options for strategy
-  }, ()=>{
-    //passport callback function
-  })
+  },
+  (accessToken, refreshToken, profile, done) => {
+          // passport callback function
+          console.log('passport callback function fired:');
+          console.log(profile);
+      })
+//   function(token, tokenSecret, profile, done) {
+//     User.findOrCreate({ googleId: profile.id }, function (err, user) {
+//       return done(err, user);
+//     });
+// }
 )
