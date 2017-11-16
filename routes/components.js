@@ -3,18 +3,33 @@ var knex = require('../knex')
 var router = express.Router();
 const boom = require('boom')
 const jwt = require('jsonwebtoken')
-
+var bikeMileage;
+var bikeArr=[];
 router.patch('/', (req, res, next)=>{
-  knex('components').where({bike_id: 1}).then((components)=>{
-    delete components[0]['id']
-    delete components[0]['bike_id']
-    for(var i in components[0]){
-      components[0][i]-=Number(req.body.mileage)
-    }
-    knex('components').update(components[0], '*').where({bike_id: 1}).then((components)=>{
-      delete components[0]['id']
-      delete components[0]['bike_id']
-      res.send(components[0])
+knex('bikes').where({id: 1}).then((bike)=>{
+  bike[0]['total_mileage']+=Number(req.body.mileage)
+  bikeMileage=[bike[0]['total_mileage']];
+  return bike[0]
+}).then((bike)=>{
+  knex('bikes').update(bike, '*').where({id: 1}).then((updatedBike)=>{
+    return updatedBike
+      }).then((updatedBike)=>{
+        knex('components').where({bike_id: 1}).then((components)=>{
+          delete components[0]['id']
+          delete components[0]['bike_id']
+          for(var i in components[0]){
+            components[0][i]-=Number(req.body.mileage)
+          }
+          return components[0]
+    }).then((components)=>{
+        knex('components').update(components, '*').where({bike_id: 1}).then((components)=>{
+          delete components[0]['id']
+          delete components[0]['bike_id']
+          bikeArr=[...components, ...bikeMileage]
+          res.send(bikeArr)
+        })
+      })
+
     })
   })
 })

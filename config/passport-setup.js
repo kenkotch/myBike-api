@@ -8,14 +8,9 @@ passport.use(new GoogleStrategy({
   clientID: keys.google.clientID,
   clientSecret: keys.google.clientSecret
   },
-  (accessToken, refreshToken, profile, done) => {
-          // passport callback function
-          console.log('passport callback function fired:');
-          console.log(profile);
-      })
-//   function(token, tokenSecret, profile, done) {
-//     User.findOrCreate({ googleId: profile.id }, function (err, user) {
-//       return done(err, user);
-//     });
-// }
-)
+  function(token, tokenSecret, profile, done) {
+    User.findOrCreate({ googleId: profile.id }, function (err, user) {
+      return done(err, user);
+    });
+}
+))
