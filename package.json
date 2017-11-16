@@ -6,9 +6,8 @@
     "start": "node ./bin/www",
     "knex": "knex",
     "heroku-postbuild": "knex migrate:rollback; knex migrate:latest; knex seed:run;",
-    "nodemon": "node app.js",
-    "dev": "nodemon app.js"
-  },
+    "nodemon": "node app.js"
+},
   "dependencies": {
     "bcrypt": "^1.0.3",
     "body-parser": "~1.18.2",
