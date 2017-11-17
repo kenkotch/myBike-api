@@ -24,10 +24,11 @@ router.get('/google',
 router.get('/google/callback',
   passport.authenticate('google', { failureRedirect: '/login' }),
   function(req, res) {
-    console.log('im getting our email verification back..fucking finally --->'+req.user)
-    // res.send('you made it kid')
-
-
+    console.log('email verification back..fucking finally --->'+req.user)
+    //res.send(req.user)
+    knex('cyclists').where({email: req.user}).then((cyclist)=>{
+      res.send(cyclist)
+    })
   });
 
 // router.get('/google/redirect', passport.authenticate('google'), (req, res, next)=>{
