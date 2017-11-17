@@ -7,12 +7,6 @@ router.get('/login', (req, res, next)=>{
   res.send('hey your logging in')
 })
 
-// router.get('/google', passport.authenticate("google", {
-//   scope: ['profile']
-// }))
-// //auth logout
-
-
 router.get('/logout', (req, res, next)=>{
   req.logout()
   res.send('check your cookies mother fucker')
@@ -25,17 +19,9 @@ router.get('/google',
 router.get('/google/callback',
   passport.authenticate('google', { failureRedirect: '/login' }),
   function(req, res) {
-    console.log('email verification back..fucking finally --->'+req.user)
-    //res.send(req.user)
     knex('cyclists').where({email: req.user}).then((cyclist)=>{
       res.send(cyclist)
     })
   });
-
-// router.get('/google/redirect', passport.authenticate('google'), (req, res, next)=>{
-//    res.redirect('/');
-//
-// })
-
 
 module.exports = router
