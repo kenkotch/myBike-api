@@ -11,12 +11,13 @@ router.get('/login', (req, res, next)=>{
 //   scope: ['profile']
 // }))
 // //auth logout
-// router.get('/logout', (req, res, next)=>{
-//   //handle with passport
-//   res.send('hey your logging out')
-// })
-//
-//
+
+
+router.get('/logout', (req, res, next)=>{
+  req.logout()
+  res.send('check your cookies mother fucker')
+
+})
 
 router.get('/google',
   passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login', 'email'] }));
