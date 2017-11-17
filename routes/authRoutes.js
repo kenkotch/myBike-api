@@ -24,12 +24,16 @@ router.get('/google',
 router.get('/google/callback',
   passport.authenticate('google', { failureRedirect: '/login' }),
   function(req, res) {
-    res.redirect('/');
+    console.log('im getting our email verification back..fucking finally --->'+req.user)
+    // res.send('you made it kid')
+
+
   });
 
-router.get('/google/redirect', passport.authenticate('google'), (req, res, next)=>{
-  res.send('you reached the callback')
-})
+// router.get('/google/redirect', passport.authenticate('google'), (req, res, next)=>{
+//    res.redirect('/');
+//
+// })
 
 
 module.exports = router

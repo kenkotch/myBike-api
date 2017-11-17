@@ -7,6 +7,17 @@ var router = express.Router();
 var passport = require('passport');
 const jwt = require('jsonwebtoken')
 
+passport.serializeUser(function(email, done) {
+  console.log('hitting serializer')
+  done(null, email);
+});
+
+passport.deserializeUser(function(email, done) {
+    console.log('hitting deserializeUser')
+    done(null, email);
+
+});
+
 
 passport.use(new GoogleStrategy({
     clientID: keys.google.clientID,
@@ -16,11 +27,7 @@ passport.use(new GoogleStrategy({
   function(accessToken, refreshToken, profile, done) {
     const email=profile['emails'][0]['value']
     //console.log(email)
-      // this is for mongodb
-      //  User.findOrCreate({ googleId: profile.id }, function (err, user) {
-      //    return done(err, user);
-      //  });
-      console.log(email)
+    done(null, email)
   }
 ));
 
