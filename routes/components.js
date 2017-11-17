@@ -6,7 +6,6 @@ const jwt = require('jsonwebtoken')
 var bikeMileage;
 var bikeArr=[];
 router.patch('/', (req, res, next)=>{
-req.user='ken.kotch@gmail.com'
 if(!req.user){
   res.send('user access only')
 }
