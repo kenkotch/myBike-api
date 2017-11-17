@@ -8,7 +8,7 @@
     "heroku-postbuild": "knex migrate:rollback; knex migrate:latest; knex seed:run;",
     "nodemon": "node app.js",
     "dev": "nodemon app.js"
-},
+  },
   "dependencies": {
     "bcrypt": "^1.0.3",
     "body-parser": "~1.18.2",
@@ -26,7 +26,8 @@
     "passport": "^0.4.0",
     "passport-facebook": "^2.1.1",
     "passport-google": "^0.3.0",
-
+    "passport-google-oauth": "^1.0.0",
+    "passport-google-oauth20": "^1.0.0",
     "passport-openid": "^0.4.0",
     "pg": "^7.3.0",
     "pug": "2.0.0-beta11",
