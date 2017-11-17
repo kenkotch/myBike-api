@@ -19,16 +19,17 @@ router.get('/login', (req, res, next)=>{
 //
 
 router.get('/google',
-  passport.authenticate('google', { scope: ['profile'] }));
+  passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }));
 
 router.get('/google/callback',
   passport.authenticate('google', { failureRedirect: '/login' }),
   function(req, res) {
     res.redirect('/');
   });
-  router.get('/google/redirect', passport.authenticate('google'), (req, res, next)=>{
-    res.send('you reached the callback')
-  })
+
+router.get('/google/redirect', passport.authenticate('google'), (req, res, next)=>{
+  res.send('you reached the callback')
+})
 
 
 module.exports = router
