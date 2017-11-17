@@ -2,7 +2,7 @@ var express = require('express');
 var knex = require('../knex')
 var router = express.Router();
 var passport = require('passport');
-//auth login
+const jwt = require('jsonwebtoken')
 router.get('/login', (req, res, next)=>{
   res.send('hey your logging in')
 })
@@ -19,7 +19,7 @@ router.get('/login', (req, res, next)=>{
 //
 
 router.get('/google',
-  passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }));
+  passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login', 'email'] }));
 
 router.get('/google/callback',
   passport.authenticate('google', { failureRedirect: '/login' }),
