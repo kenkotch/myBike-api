@@ -3,6 +3,7 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
+var cookieSession=require('cookie-session')
 var bodyParser = require('body-parser');
 var index = require('./routes/index');
 //var users = require('./routes/users');
@@ -12,7 +13,8 @@ var cyclists= require('./routes/cyclists');
 var bikes = require('./routes/bikes');
 var passportSetup=require('./config/passport-setup')
 var app = express();
-
+var session=require('express-session')
+var keys= require('./config/keys')
 
 
 const passport = require('passport')
@@ -28,7 +30,14 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(cookieSession({
+  maxAge: 24*60*60*1000,
+  keys: [keys.session.cookieKey]
+}))
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({ secret: "cats" }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/', index);
 app.use('/cyclists', cyclists)
