@@ -9,19 +9,30 @@ router.get('/', (req, res, next)=>{
   if(!req.user){
     res.send('user access only')
   }
-  var bikeArr;
-  // knex('bikes').where({cyclist_id: 1}).then((bike)=>{
-  //   bikeArr=bike;
-  //   return bike
-  // }).then((bike)=>{
-  //   knex('components').where({bike_id: bikeArr[0]['id']}).then((components)=>{
-  //     bikeArr=[...bike, ...components]
-  //     res.send(bikeArr)
-  //   })
-  // })
-  res.send(req.user)
-  knex('cyclists').where({email: req.user}).then((id)=>{
-    res.send(id)
+  var bikeArr=[];
+  var bicycle;
+  var components;
+  knex('cyclists').select('id').where({email: req.user}).then((id)=>{
+    if(id.length===0){
+      res.send('user access only')
+    }
+    return id[0]['id']
+  }).then((id)=>{
+    knex('bikes').select('id', 'name', 'total_mileage').where({cyclist_id: id}).then((bike)=>{
+      var bikeId=bike[0]['id'];
+      var bikeStuff=bike
+      delete bikeStuff[0]['id']
+      bicycle=bikeStuff
+      return bikeId
+    }).then((bikeId)=>{
+      knex('components').where({bike_id: bikeId}).then((bikeComponents)=>{
+        components=bikeComponents;
+        delete components[0]['id']
+        delete components[0]['bike_id']
+        bikeArr=[...bicycle, ...components]
+        res.send(bikeArr)
+      })
+    })
   })
 })
 

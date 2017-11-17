@@ -8,11 +8,10 @@ router.get('/login', (req, res, next)=>{
 })
 
 router.get('/logout', (req, res, next)=>{
-  req.logout()
   res.send('check your cookies mother fucker')
+  req.logout()
 
 })
-
 router.get('/google',
   passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login', 'email'] }));
 
