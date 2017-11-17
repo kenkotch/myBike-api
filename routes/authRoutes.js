@@ -8,8 +8,8 @@ router.get('/login', (req, res, next)=>{
 })
 
 router.get('/logout', (req, res, next)=>{
-  res.send('check your cookies mother fucker')
   req.logout()
+  res.send('check your cookies mother fucker')
 
 })
 router.get('/google',
