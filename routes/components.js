@@ -6,14 +6,11 @@ const jwt = require('jsonwebtoken')
 var bikeMileage;
 var bikeArr=[];
 router.patch('/', (req, res, next)=>{
-req.user='sean.lemberg@gmail.com'
-
+req.user='ken.kotch@gmail.com'
 if(!req.user){
   res.send('user access only')
 }
-//res.send(req.user)
 var bike_id;
-
 knex('cyclists').select('id').where({email: req.user}).then((id)=>{
   return id[0]['id']
 }).then((id)=>{
@@ -39,14 +36,11 @@ knex('cyclists').select('id').where({email: req.user}).then((id)=>{
           delete components[0]['bike_id']
           bikeArr=[...components, ...bikeMileage]
           res.send(bikeArr)
+          })
         })
       })
-
     })
   })
-
-})
-
 })
 
 module.exports=router
