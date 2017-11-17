@@ -6,14 +6,16 @@
     "start": "node ./bin/www",
     "knex": "knex",
     "heroku-postbuild": "knex migrate:rollback; knex migrate:latest; knex seed:run;",
-    "nodemon": "node app.js"
-},
+    "nodemon": "node app.js",
+    "dev": "nodemon app.js"
+  },
   "dependencies": {
     "bcrypt": "^1.0.3",
     "body-parser": "~1.18.2",
     "boom": "^6.0.0",
     "connect-flash": "^0.1.1",
     "cookie-parser": "~1.4.3",
+    "cookie-session": "^2.0.0-beta.3",
     "debug": "~2.6.9",
     "dotenv": "^4.0.0",
     "express": "~4.15.5",
@@ -25,6 +27,7 @@
     "passport": "^0.4.0",
     "passport-facebook": "^2.1.1",
     "passport-google": "^0.3.0",
+    "passport-google-oauth": "^1.0.0",
     "passport-google-oauth20": "^1.0.0",
     "passport-openid": "^0.4.0",
     "pg": "^7.3.0",
