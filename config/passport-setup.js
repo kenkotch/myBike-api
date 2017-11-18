@@ -22,7 +22,7 @@ passport.deserializeUser(function(email, done) {
 passport.use(new GoogleStrategy({
     clientID: keys.google.clientID,
     clientSecret: keys.google.clientSecret,
-    callbackURL: "http://localhost:3000/auth/google/callback"
+    callbackURL: "https://my-bike.herokuapp.com/auth/google/callback"
   },
   function(accessToken, refreshToken, profile, done) {
     const email=profile['emails'][0]['value']
