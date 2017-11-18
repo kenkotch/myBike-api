@@ -19,7 +19,7 @@ router.get('/google/callback',
   passport.authenticate('google', { failureRedirect: '/login' }),
   function(req, res) {
     knex('cyclists').where({email: req.user}).then((cyclist)=>{
-      res.send(cyclist)
+      res.send('hi kashi')
     })
   });
 module.exports = router
