@@ -20,8 +20,8 @@ router.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/login' }),
   function(req, res) {
     knex('cyclists').where({email: req.user}).then((cyclist)=>{
-      // res.send(cyclist)
-      res.redirect('myBike-oauth-api://login?user=' + JSON.stringify(req.user))
+      res.send(cyclist)
+      // res.redirect('myBike-oauth-api://login?user=' + JSON.stringify(req.user))
     })
   });
 
