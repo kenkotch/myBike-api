@@ -4,16 +4,16 @@ var router = express.Router();
 var passport = require('passport');
 const jwt = require('jsonwebtoken')
 
-router.get('/auth/login', (req, res, next)=>{
+router.get('/login', (req, res, next)=>{
   res.send('hey your logging in')
 })
 
-router.get('/auth/logout', (req, res, next)=>{
+router.get('/logout', (req, res, next)=>{
   req.logout()
   res.send('cookeis are gone!')
 
 })
-router.get('/auth/google',
+router.get('/google',
   passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login', 'email'] }));
 
 router.get('/auth/google/callback',
