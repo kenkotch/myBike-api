@@ -22,5 +22,4 @@ router.get('/google/callback',
       res.send(cyclist)
     })
   });
-
 module.exports = router
