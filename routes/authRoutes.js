@@ -3,6 +3,7 @@ var knex = require('../knex')
 var router = express.Router();
 var passport = require('passport');
 const jwt = require('jsonwebtoken')
+const mybike = 'My Bike'
 
 router.get('/login', (req, res, next)=>{
   res.send('hey your logging in')
@@ -20,7 +21,8 @@ router.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/login' }),
   function(req, res) {
     knex('cyclists').where({email: req.user}).then((cyclist)=>{
-      res.send(cyclist)
+      // res.send(cyclist)
+      res.redirect(`${mybike}://login?user=` + JSON.stringify(req.user))
     })
   });
 
