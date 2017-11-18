@@ -34,7 +34,7 @@ router.get('/', (req, res, next)=>{
       })
     })
   })
-  // res.send([{"name":"purple","total_mileage":140},{"chain":60,"tires":60,"brake_pads":60}])
+  //res.send([{"name":"purple","total_mileage":140},{"chain":60,"tires":60,"brake_pads":60}])
 })
 
 router.post('/', (req, res, next)=>{
