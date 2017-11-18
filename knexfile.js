@@ -3,7 +3,7 @@
 module.exports = {
   development: {
     client: 'pg',
-    connection: "postgres://my-bike.herokuapp.com/myBike"
+    connection: "postgres://localhost/myBike"
   },
   production: {
     client: 'pg',
