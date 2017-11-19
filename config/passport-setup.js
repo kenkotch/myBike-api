@@ -26,7 +26,7 @@ passport.use(new GoogleStrategy({
   },
   function(accessToken, refreshToken, profile, done) {
     const email=profile['emails'][0]['value']
-    console.log('email', email)
+    console.log('email:', email)
     done(null, email)
   }
 ));
