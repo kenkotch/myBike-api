@@ -25,6 +25,7 @@ router.get('/google/callback',
   passport.authenticate('google', { failureRedirect: '/login' }),
   function(req, res) {
       // res.cookie(token, 'cookies')
+      
       console.log('req.user:', req.user)
       res.redirect('bike://login?user=' + JSON.stringify(req.user))
   });

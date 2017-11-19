@@ -5,14 +5,12 @@ var router = express.Router();
 const boom = require('boom')
 const jwt = require('jsonwebtoken')
 //im going to remove the liquid and make it hard..
-router.get('/', (req, res, next)=>{
-  if(!req.user){
-    res.send('user access only')
-  }
+router.post('/', (req, res, next)=>{
+
   var bikeArr=[];
   var bicycle;
   var components;
-  knex('cyclists').select('id').where({email: req.user}).then((id)=>{
+  knex('cyclists').select('id').where({email: req.body.email}).then((id)=>{
     if(id.length===0){
       res.send('user access only')
     }
