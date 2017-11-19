@@ -6,11 +6,11 @@ const jwt = require('jsonwebtoken')
 var bikeMileage;
 var bikeArr=[];
 router.patch('/', (req, res, next)=>{
-if(!req.user){
+if(!req.body.email){
   res.send('user access only')
 }
 var bike_id;
-knex('cyclists').select('id').where({email: req.user}).then((id)=>{
+knex('cyclists').select('id').where({email: req.body.email}).then((id)=>{
   return id[0]['id']
 }).then((id)=>{
   knex('bikes').where({id: id}).then((bike)=>{
