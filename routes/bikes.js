@@ -1,7 +1,7 @@
-var express = require('express');
+const express = require('express');
 
-var knex = require('../knex')
-var router = express.Router();
+const knex = require('../knex')
+const router = express.Router();
 const boom = require('boom')
 const jwt = require('jsonwebtoken')
 //im going to remove the liquid and make it hard..
@@ -9,9 +9,9 @@ router.get('/', (req, res, next)=>{
   if(!req.user){
     res.send('user access only')
   }
-  var bikeArr=[];
-  var bicycle;
-  var components;
+  let bikeArr=[];
+  let bicycle;
+  let components;
   knex('cyclists').select('id').where({email: req.user}).then((id)=>{
     if(id.length===0){
       res.send('user access only')
@@ -19,8 +19,8 @@ router.get('/', (req, res, next)=>{
     return id[0]['id']
   }).then((id)=>{
     knex('bikes').select('id', 'name', 'total_mileage').where({cyclist_id: id}).then((bike)=>{
-      var bikeId=bike[0]['id'];
-      var bikeStuff=bike
+      let bikeId=bike[0]['id'];
+      let bikeStuff=bike
       delete bikeStuff[0]['id']
       bicycle=bikeStuff
       return bikeId
@@ -38,7 +38,7 @@ router.get('/', (req, res, next)=>{
 })
 
 router.post('/', (req, res, next)=>{
-  res.send('the will is stronger than the skill')
+  res.send('the will is stronger than the skill, kashi was tired...')
 })
 
 module.exports = router;
