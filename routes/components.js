@@ -97,7 +97,7 @@ router.patch('/brakes', (req, res, next)=>{
         })
       })
     })
-    //push heroku
+    //push herok
 })
 
 module.exports=router
