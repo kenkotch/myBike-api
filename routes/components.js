@@ -52,6 +52,7 @@ router.patch('/tires', (req, res, next)=>{
         return id[0]['id']
       }).then((bike_id)=>{
         knex('components').update({tires:  1500}).where({bike_id: bike_id}).then(()=>{
+
           knex('components').select('tires').where({bike_id: bike_id}).then((tires)=>{
             res.send(tires[0]['tires'].toString())
           })
@@ -70,6 +71,10 @@ router.patch('/chain', (req, res, next)=>{
         return id[0]['id']
       }).then((bike_id)=>{
         knex('components').update({chain:  2000}).where({bike_id: bike_id}).then(()=>{
+
+
+
+
           knex('components').select('chain').where({bike_id: bike_id}).then((chain)=>{
             res.send(chain[0]['chain'].toString())
           })
@@ -88,6 +93,10 @@ router.patch('/brakes', (req, res, next)=>{
         return id[0]['id']
       }).then((bike_id)=>{
         knex('components').update({brake_pads:  300}).where({bike_id: bike_id}).then(()=>{
+
+
+
+
           knex('components').select('brake_pads').where({bike_id: bike_id}).then((brake_pads)=>{
             res.send(brake_pads[0]['brake_pads'].toString())
           })
