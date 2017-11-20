@@ -1,20 +1,23 @@
 var express = require('express');
-
 var knex = require('../knex')
 var router = express.Router();
 const boom = require('boom')
 const jwt = require('jsonwebtoken')
-//im going to remove the liquid and make it hard..
-router.get('/', (req, res, next)=>{
-  if(!req.user){
-    res.send('user access only')
-  }
+//pizza camel deluxe
+router.post('/', (req, res, next)=>{
   var bikeArr=[];
   var bicycle;
   var components;
-  knex('cyclists').select('id').where({email: req.user}).then((id)=>{
+  knex('cyclists').select('id').where({email: req.body.email}).then((id)=>{
     if(id.length===0){
-      res.send('user access only')
+      knex('cyclists').max('id').then((id)=>{
+        return id[0]['max']+1;
+      }).then((insertId)=>{
+        req.body.id=insertId;
+        knex('cyclists').insert(req.body).then(()=>{
+            return res.send('created')
+        })
+      })
     }
     return id[0]['id']
   }).then((id)=>{
@@ -34,11 +37,45 @@ router.get('/', (req, res, next)=>{
       })
     })
   })
-  //res.send([{"name":"purple","total_mileage":140},{"chain":60,"tires":60,"brake_pads":60}])
 })
 
-router.post('/', (req, res, next)=>{
-  res.send('the will is stronger than the skill')
+router.post('/add', (req, res, next)=>{
+  var cyclistIdHolder;
+  var finalArr=[]
+  var coolBikeId;
+  knex('cyclists').max('id').then((id)=>{
+    cyclistIdHolder=id[0]['max']
+  }).then(()=>{
+    knex('bikes').max('id').then((id)=>{
+      return id[0]['max']+1;
+    }).then((insertId)=>{
+      coolBikeId=insertId;
+      req.body.id=insertId;
+      req.body.cyclist_id=cyclistIdHolder;
+      knex('bikes').insert(req.body).then(()=>{
+        delete req.body.id;
+        delete req.body.cyclist_id;
+      }).then(()=>{
+        knex('components').max('id').then((id)=>{
+          return id[0]['max']+1;
+        }).then((insertId)=>{
+          var newComponents= new Object();
+          newComponents.id=insertId;
+          newComponents.chain=2000;
+          newComponents.tires=1500;
+          newComponents.brake_pads=300;
+          newComponents.bike_id=coolBikeId;
+          knex('components').insert(newComponents).then(()=>{
+            delete newComponents.id;
+            delete newComponents.bike_id;
+            finalArr.push(req.body);
+            finalArr.push(newComponents);
+            res.send(finalArr)
+          })
+        })
+      })
+    })
+  })
 })
 
 module.exports = router;
