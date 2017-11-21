@@ -24,7 +24,7 @@ router.post('/', (req, res, next)=>{
     blueDreams=id[0]['id']
 //asdfasdf
 
-
+//sdagsdfg
     knex('bikes').select('id', 'name', 'total_mileage').where({cyclist_id: blueDreams}).then((bike)=>{
       var bikeId=bike[0]['id'];
       var bikeStuff=bike
