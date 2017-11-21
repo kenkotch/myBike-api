@@ -15,7 +15,7 @@ router.post('/', (req, res, next)=>{
       }).then((insertId)=>{
         req.body.id=insertId;
         knex('cyclists').insert(req.body).then(()=>{
-            return res.send('created')
+            return res.end('created')
         })
       })
     }
