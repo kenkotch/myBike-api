@@ -4,6 +4,7 @@ var router = express.Router();
 const boom = require('boom')
 const jwt = require('jsonwebtoken')
 //pizza camel deluxe
+var blueDreams;
 router.post('/', (req, res, next)=>{
   var bikeArr=[];
   var bicycle;
@@ -16,12 +17,15 @@ router.post('/', (req, res, next)=>{
         req.body.id=insertId;
         knex('cyclists').insert(req.body).then(()=>{
             return res.end('created')
+            //knex.destroy();
         })
       })
-    }
-    return id[0]['id']
-  }).then((id)=>{
-    knex('bikes').select('id', 'name', 'total_mileage').where({cyclist_id: id}).then((bike)=>{
+    }else if(id.length!==0){
+    blueDreams=id[0]['id']
+
+
+
+    knex('bikes').select('id', 'name', 'total_mileage').where({cyclist_id: blueDreams}).then((bike)=>{
       var bikeId=bike[0]['id'];
       var bikeStuff=bike
       delete bikeStuff[0]['id']
@@ -36,7 +40,9 @@ router.post('/', (req, res, next)=>{
         res.send(bikeArr)
       })
     })
-  })
+  }
+})
+
 })
 
 router.post('/add', (req, res, next)=>{
