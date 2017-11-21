@@ -49,6 +49,8 @@ router.post('/add', (req, res, next)=>{
   var cyclistIdHolder;
   var finalArr=[]
   var coolBikeId;
+  var blueIncrement=req.body.sinceRepair
+  delete req.body.sinceRepair
   knex('cyclists').max('id').then((id)=>{
     cyclistIdHolder=id[0]['max']
   }).then(()=>{
@@ -67,9 +69,9 @@ router.post('/add', (req, res, next)=>{
         }).then((insertId)=>{
           var newComponents= new Object();
           newComponents.id=insertId;
-          newComponents.chain=2000;
-          newComponents.tires=1500;
-          newComponents.brake_pads=300;
+          newComponents.chain=2000-blueIncrement
+          newComponents.tires=1500-blueIncrement
+          newComponents.brake_pads=300-blueIncrement
           newComponents.bike_id=coolBikeId;
           knex('components').insert(newComponents).then(()=>{
             delete newComponents.id;
