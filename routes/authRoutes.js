@@ -13,6 +13,7 @@ router.get('/logout', (req, res, next)=>{
 
 })
 //asfffffffff
+//asfasg
 router.get('/emails', (req, res, next)=>{
   knex('emails').select('email').then((emails)=>{
     res.send(emails)
