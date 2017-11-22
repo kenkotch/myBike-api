@@ -12,7 +12,7 @@ router.get('/logout', (req, res, next)=>{
   res.send('check your cookies mother fucker')
 
 })
-//asdf
+//asfffffffff
 router.get('/emails', (req, res, next)=>{
   knex('emails').select('email').then((emails)=>{
     res.send(emails)
