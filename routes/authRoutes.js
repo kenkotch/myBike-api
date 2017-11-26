@@ -12,7 +12,8 @@ router.get('/logout', (req, res, next)=>{
   res.send('logged out')
 
 })
-
+//asfffffffff
+//asfasg
 router.get('/emails', (req, res, next)=>{
   knex('emails').select('email').then((emails)=>{
     res.send(emails)
@@ -24,9 +25,9 @@ router.get('/google',
 router.get('/google/callback',
   passport.authenticate('google', { failureRedirect: '/login' }),
   function(req, res) {
-    console.log('req.user:', req.user)
-    res.redirect('bikeNew://login?user=' + JSON.stringify(req.user))
-  }
-)
+      // res.cookie(token, 'cookies')
 
+      console.log('req.user:', req.user)
+      res.redirect('bikeNew://login?user=' + JSON.stringify(req.user))
+  });
 module.exports = router
