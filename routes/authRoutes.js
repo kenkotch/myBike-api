@@ -9,7 +9,7 @@ router.get('/login', (req, res, next)=>{
 
 router.get('/logout', (req, res, next)=>{
   req.logout()
-  res.send('check your cookies mother fucker')
+  res.send('logged out')
 
 })
 
@@ -24,9 +24,9 @@ router.get('/google',
 router.get('/google/callback',
   passport.authenticate('google', { failureRedirect: '/login' }),
   function(req, res) {
-      // res.cookie(token, 'cookies')
-      
-      console.log('req.user:', req.user)
-      res.redirect('bike://login?user=' + JSON.stringify(req.user))
-  });
+    console.log('req.user:', req.user)
+    res.redirect('bikeNew://login?user=' + JSON.stringify(req.user))
+  }
+)
+
 module.exports = router

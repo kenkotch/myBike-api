@@ -3,7 +3,7 @@ var knex = require('../knex')
 var router = express.Router();
 const boom = require('boom')
 const jwt = require('jsonwebtoken')
-//pizza camel deluxe
+
 router.post('/', (req, res, next)=>{
   var bikeArr=[];
   var bicycle;
