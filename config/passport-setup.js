@@ -1,20 +1,23 @@
-
-const passport = require('passport')
-const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
+var passport = require('passport');
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const keys = require('./keys')
-const express = require('express')
-const router = express.Router()
-const passport = require('passport')
+var express = require('express');
+// var knex = require('../knex')
+var router = express.Router();
+var passport = require('passport');
+// const jwt = require('jsonwebtoken')
 
 passport.serializeUser(function(email, done) {
   console.log('hitting serializer')
-  done(null, email)
-})
+  done(null, email);
+});
 
 passport.deserializeUser(function(email, done) {
     console.log('hitting deserializeUser')
-    done(null, email)
-})
+    done(null, email);
+
+});
+
 
 passport.use(new GoogleStrategy({
     clientID: keys.google.clientID,
@@ -26,6 +29,6 @@ passport.use(new GoogleStrategy({
     console.log('email:', email)
     done(null, email)
   }
-))
+));
 
 module.exports = router

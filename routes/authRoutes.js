@@ -1,7 +1,7 @@
-const express = require('express')
-const knex = require('../knex')
-const router = express.Router()
-const passport = require('passport')
+var express = require('express')
+var knex = require('../knex')
+var router = express.Router()
+var passport = require('passport')
 const jwt = require('jsonwebtoken')
 
 router.get('/login', (req, res, next) => {
